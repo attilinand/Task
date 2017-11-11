@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sgcib.input.trade.repo.model.Account;
 
 @RestController
-public class Api {
+public class TradeRepoInputServiceController {
 
 	private List<Account> accounts;
 	
-	protected Logger logger = Logger.getLogger(Api.class.getName());
+	protected Logger logger = Logger.getLogger(TradeRepoInputServiceController.class.getName());
 	
-	public Api() {
+	public TradeRepoInputServiceController() {
 		accounts = new ArrayList<>();
 		accounts.add(new Account(1, 1, "111111"));
 		accounts.add(new Account(2, 2, "222222"));
