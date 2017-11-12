@@ -1,4 +1,4 @@
-package pl.piomin.microservices.zipkin;
+package com.sgcib.trade.repo.zipkin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import zipkin.server.EnableZipkinServer;
 
 @SpringBootApplication
 @EnableZipkinServer
-public class Application {
+public class ZipkinServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(ZipkinServerApplication.class, args);
 	}
 
 }

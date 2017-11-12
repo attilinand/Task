@@ -1,4 +1,4 @@
-package com.sgcib.input.trade.repo.model;
+package com.sgcib.output.trade.repo.model;
 /**
  * 
  * @author Nanda

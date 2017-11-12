@@ -13,30 +13,34 @@ import com.sgcib.output.trade.repo.feign.client.AccountClient;
 import com.sgcib.output.trade.repo.model.Account;
 import com.sgcib.output.trade.repo.model.Customer;
 import com.sgcib.output.trade.repo.model.CustomerType;
-
+import com.sgcib.output.trade.repo.model.TradeView;
+import com.sgcib.output.trade.repo.transformation.service.TradeFetchService;
+/**
+ * Controller class which has all the end points
+ * @author Nanda
+ *
+ */
 @RestController
-public class Api {
+public class TradeRepoOutputServiceController {
 	
 	@Autowired
 	private AccountClient accountClient;
 	
-	protected Logger logger = Logger.getLogger(Api.class.getName());
+	@Autowired
+	private TradeFetchService tradeFetchService;
+	
+	protected Logger logger = Logger.getLogger(TradeRepoOutputServiceController.class.getName());
 	
 	private List<Customer> customers;
 	
-	public Api() {
+	public TradeRepoOutputServiceController() {
 		customers = new ArrayList<>();
-		customers.add(new Customer(1, "12345", "Adam Kowalski", CustomerType.INDIVIDUAL));
-		customers.add(new Customer(2, "12346", "Anna Malinowska", CustomerType.INDIVIDUAL));
-		customers.add(new Customer(3, "12347", "Paweł Michalski", CustomerType.INDIVIDUAL));
-		customers.add(new Customer(4, "12348", "Karolina Lewandowska", CustomerType.INDIVIDUAL));
+		customers.add(new Customer(1, "12345", "Sachin tendulkar", CustomerType.INDIVIDUAL));
+		customers.add(new Customer(2, "12346", "Roger Federer", CustomerType.INDIVIDUAL));
+		customers.add(new Customer(3, "12347", "Albert Einstein", CustomerType.INDIVIDUAL));
+		customers.add(new Customer(4, "12348", "Mohammad Ali", CustomerType.INDIVIDUAL));
 	}
 	
-	@RequestMapping("/customers/pesel/{pesel}")
-	public Customer findByPesel(@PathVariable("pesel") String pesel) {
-		logger.info(String.format("Customer.findByPesel(%s)", pesel));
-		return customers.stream().filter(it -> it.getPesel().equals(pesel)).findFirst().get();	
-	}
 	
 	@RequestMapping("/customers")
 	public List<Customer> findAll() {
@@ -51,6 +55,12 @@ public class Api {
 		List<Account> accounts =  accountClient.getAccounts(id);
 		customer.setAccounts(accounts);
 		return customer;
+	}
+	
+	@RequestMapping("/customers/get")
+	public TradeView getTradeData() {
+		logger.info("getTradeData");
+		return tradeFetchService.fetchTradeFromDb(null, null, "RISK");
 	}
 	
 }
