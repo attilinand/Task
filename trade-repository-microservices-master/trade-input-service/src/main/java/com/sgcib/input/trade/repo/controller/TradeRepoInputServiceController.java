@@ -51,4 +51,13 @@ public class TradeRepoInputServiceController {
 		return accounts;
 	}
 	
+	@RequestMapping("/saveTrade")
+	public List<Account> saveTrade() {
+		logger.info("Account.findAll()");
+		return accounts;
+	}
+	
+	
+	
+	
 }
